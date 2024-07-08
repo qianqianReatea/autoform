@@ -7,6 +7,7 @@ import Radio from './components/radio/index';
 import Textarea from "./components/textarea/index";
 import Timepicker from "./components/timepicker/index";
 import Switch from "./components/switch/index";
+import Button from "./components/button/index";
 
 
 const components = [
@@ -18,7 +19,8 @@ const components = [
     Radio,
     Textarea,
     Timepicker,
-    Switch
+    Switch,
+    Button
 ];
 
 const install = function (Vue, options) {
@@ -31,24 +33,19 @@ const install = function (Vue, options) {
     if(! Vue.$autoform){
         console.log(`请先引入 autoform`)
     }
-
     Vue.$autoform.Register(Vue, components, options)
 
 };
 
 /* istanbul ignore if */
-if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
-};
+// if (typeof window !== 'undefined' && window.Vue) {
+//     install(window.Vue);
+// };
 
 let Conf_component_lib = {
     install,
     components
 }
-
-
-
-
 
 
 export default Conf_component_lib;

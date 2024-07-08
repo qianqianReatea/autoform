@@ -18,7 +18,8 @@ module.exports = (options = {}) => ({
         umdNamedDefine: true
     },
     externals: {
-        'vue': 'vue'
+        Vue: 'vue',
+        'element-ui': 'ELEMENT'
     },
     devtool: '#source-map',
     module: {
@@ -54,7 +55,10 @@ module.exports = (options = {}) => ({
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
-            '~': resolve(__dirname, 'src')
+            '~': resolve(__dirname, 'src'),
+            'autoform_editor': resolve(__dirname, '../autoform_editor'),
+            'autoform': resolve(__dirname, '../autoform'),
+            'autoform_component_lib': resolve(__dirname, '../autoform_component_lib')
         }
     },
     devtool: options.dev ? '#eval-source-map' : '#source-map'

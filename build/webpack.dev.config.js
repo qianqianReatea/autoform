@@ -18,7 +18,8 @@ module.exports = {
         alias: {
             vue: 'vue/dist/vue.js',
             'autoform': path.resolve(__dirname, '../autoform'),
-            "autoform_component_lib": path.resolve(__dirname, '../autoform_component_lib')
+            "autoform_component_lib": path.resolve(__dirname, '../autoform_component_lib'),
+            "autoform_editor": path.resolve(__dirname, '../autoform_editor')
         }
     },
     devServer: {
@@ -45,6 +46,13 @@ module.exports = {
                     }
                 },
                 exclude: [/node_modules/]
+            },
+            {
+
+                test: /\.less$/,
+
+                loader: "style-loader!css-loader!less-loader",
+
             },
             {
                 test: /\.css$/,

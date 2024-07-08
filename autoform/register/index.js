@@ -11,7 +11,6 @@ import {
 export const Register = (Vue, registerComponents, options = {
     prefix: "c"
 }) => {
-
     let pattern = new RegExp('^' + options.prefix);
     registerComponents.forEach((key) => {
         //remove
@@ -72,5 +71,32 @@ export const RegisterDir = (callback, options = {
             addType(cc, component);
             addType(ml, component);
         }
+    });
+}
+
+export const registerDirWithConfig = (callback, name) => {
+
+    if (typeof callback !== 'function') {
+        return;
+    }
+    let fields = callback();
+    let fieldskey = [];
+    fields.keys().forEach(key => {
+        if (key.match(/\/(\S*)\//) && key.match(/\/(\S*)\//)[1]) {
+            let dir = key.match(/\/(\S*)\//)[1];
+            if (fieldskey.indexOf(dir) === -1) {
+                fieldskey.push(dir);
+            }
+        }
+    });
+    fieldskey.forEach(key => {
+        let component = fields(`./${key}/index`);
+        let config = fields(`./${key}/description`).config;
+        let componentName = config.type;
+        if (component.default) {
+            component = component.default;
+        }
+        component.__CONFIG__ = config;
+        addType(componentName, component);
     });
 }

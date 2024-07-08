@@ -7,8 +7,10 @@
     "dev": "cross-env NODE_ENV=dev  webpack-dev-server --progress --open",
     "build": " rimraf  ./autoform/dist/lib &  cross-env NODE_ENV=build   webpack -p --progress && npm run echo-build",
     "build-lib": " rimraf  ./autoform_component_lib/dist/lib &  cross-env NODE_ENV=lib  webpack -p --progress && npm run echo-lib",
-    "echo-build": "echo '\\033[33m AutoForm打包完成，npm发布路径为： \\033[0m \\033[34m autoform/lib \\033[0m \\033[33m 发布完成后务必push \\033[0m '",
-    "echo-lib": "echo '\\033[33m 组件库打包完成，npm发布路径为： \\033[0m \\033[34m autoform_component_lib/\\033[0m \\033[33m 发布完成后务必push \\033[0m '"
+    "build-editor": " rimraf  ./autoform_editor/dist/lib &  cross-env NODE_ENV=editor  webpack -p --progress",
+    "echo-build": "echo '\\033[33m AutoForm打包完成，npm发布路径为： \\033[0m \\033[34m autoform/dist \\033[0m \\033[33m 发布完成后务必push \\033[0m '",
+    "echo-lib": "echo '\\033[33m 组件库打包完成，npm发布路径为： \\033[0m \\033[34m autoform_component_lib/dist \\033[0m \\033[33m 发布完成后务必push \\033[0m '",
+    "build:pub": " sh build/deploy-build.sh"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "babel-core": "^6.26.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.2",
     "babel-loader": "^7.1.2",
+    "babel-plugin-jsx-v-model": "^2.0.3",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -32,9 +35,12 @@
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
     "json-loader": "^0.5.7",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
     "postcss-loader": "^2.0.8",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
+    "sortablejs": "^1.7.0",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.5.0",
     "vue-template-compiler": "2.5.3",
@@ -42,8 +48,12 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
-    "element-ui": "^2.0.5",
+    "@hfe/autoform": "1.1.83",
+    "@hfe/autoform_component_lib": "0.0.49",
+    "element-ui": "1.4.13",
     "vue": "2.5.3",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuedraggable": "^2.16.0",
+    "vuex": "^3.0.1"
   }
 }

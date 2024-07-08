@@ -1,22 +1,22 @@
 {
-    "presets": [
-      ["env", {
-        "modules": false,
-        "targets": {
-          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-        }
-      }]
-    ],
-    "plugins": [
-      "transform-runtime", 
-      "transform-vue-jsx",
-      "transform-object-rest-spread"
-    ],
-    "env": {
-      "test": {
-        "presets": ["env"],
-        "plugins": ["istanbul"]
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions"]
       }
+    }]
+  ],
+  "plugins": [
+    "transform-runtime", 
+    "transform-vue-jsx",
+    "transform-object-rest-spread",
+    "jsx-v-model"
+  ],
+  "env": {
+    "test": {
+      "presets": ["env"],
+      "plugins": ["istanbul"]
     }
   }
-  
+}

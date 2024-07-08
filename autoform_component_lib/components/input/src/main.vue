@@ -10,10 +10,12 @@
         :prefix-icon="to.prefixIcon"
         :suffix-icon="to.suffixIcon"
         :required="to.required"
+        :readonly="to.readonly"
+        :clearable="to.clearable"
         @blur="onBlur"
         @focus="onFocus"
         @change="onChange"
-        @keyup="onKeyup"
+        @keyup.native="onKeyup"
         @keydown="onKeydown"
         v-form-atts="to.atts"
         v-form-input-type="to.inputType">

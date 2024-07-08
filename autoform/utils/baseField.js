@@ -13,7 +13,7 @@ export default {
       //
       switch (typeof this.to[action]) {
         case 'function':
-          this.to[action].apply(this, args);
+          this.to[action].apply(this, args, this.field);
           break;
         case "string":
           if (!this.eventBus) {
@@ -25,33 +25,36 @@ export default {
       }
     },
     onFocus: function (e) {
-      this.runFunction('onFocus', e);
+      this.runFunction('onFocus', e, this.field);
     },
     onBlur: function (e) {
-      this.runFunction('onBlur', e);
+      this.runFunction('onBlur', e, this.field);
     },
     onClick: function (e) {
-      this.runFunction('onClick', e);
+      this.runFunction('onClick', e, this.field);
     },
     onChange: function (e) {
-      this.runFunction('onChange', e);
+      this.runFunction('onChange', e, this.field);
     },
     onKeyup: function (e) {
-      this.runFunction('onKeyup', e);
+      this.runFunction('onKeyup', e, this.field);
     },
     onKeydown: function (e) {
-      this.runFunction('onKeydown', e);
+      this.runFunction('onKeydown', e, this.field);
     },
     onEmuChange: function (e) {
-      let model;
-
+      let options;
+      let oldOpt = this.options || [];
+      if (Object.prototype.toString.call(this.options) !== '[object Array]') {
+          oldOpt = [];
+      }
       switch (Object.prototype.toString.call(e)) {
         case '[object String]':
         case '[object Number]':
-          model = this.to.options.find(item => e === (item[this.to.optionKey] || item.value));
+            options = oldOpt.find(item => e === (item[this.to.optionKey] || item.value));
           break;
         case '[object Array]':
-          model = this.to.options.filter(item => e.indexOf(item[this.to.optionKey] || item.value) >= 0);
+            options = oldOpt.filter(item => e.indexOf(item[this.to.optionKey] || item.value) >= 0);
           break;
       }
 
@@ -61,10 +64,10 @@ export default {
             console.warn('事件总线为空');
             return;
           }
-          this.eventBus.$emit(this.to.onChange, e, model);
+          this.eventBus.$emit(this.to.onChange, e, options, this.field);
           break;
         case 'function':
-          this.to.onChange.call(this, e, model);
+          this.to.onChange.call(this, e, options, this.field);
           break;
       }
     }
